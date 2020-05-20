@@ -93,7 +93,9 @@ class FirstStage extends React.Component<PropsFromRedux> {
   }
 
   isFirstStageValid() {
-    return !(this.props.firstName.error || this.props.lastName.error || this.props.email.error);
+    const hasNoError = !(this.props.firstName.error || this.props.lastName.error || this.props.email.error);
+    const touched = (this.props.firstName.touched || this.props.lastName.touched || this.props.email.touched);
+    return hasNoError && touched;
   }
 
   render() {

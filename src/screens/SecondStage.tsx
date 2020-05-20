@@ -49,7 +49,6 @@ class SecondStage extends React.Component<PropsFromRedux> {
     this.handleChange = this.handleChange.bind(this);
     this.setDateOfBirth = this.setDateOfBirth.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
-    this.isSecondStageValid = this.isSecondStageValid.bind(this);
   }
 
   // move to previous page
@@ -95,10 +94,6 @@ class SecondStage extends React.Component<PropsFromRedux> {
     }
   }
 
-  isSecondStageValid() {
-    return !(this.props.policyNo.error || this.props.dateOfBirth.error);
-  }
-
   render() {
     const { policyNo, dateOfBirth, description } = this.props;
 
@@ -133,7 +128,7 @@ class SecondStage extends React.Component<PropsFromRedux> {
 
             <div className="buttons">
                 <Button id="btnPrevious" text="< Prev" click={this.buttonPrevClick}></Button>
-                <Button id="btnSubmit" type="submit" text="Submit" disabled={this.isSecondStageValid() ? false : true}></Button>
+                <Button id="btnSubmit" type="submit" text="Submit"></Button>
             </div>
         </div>
       );

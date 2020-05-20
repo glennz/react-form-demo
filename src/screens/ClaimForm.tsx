@@ -53,13 +53,16 @@ class ClaimForm extends React.Component<PropsFromRedux> {
   }
 
   isSecondStageValid() {
-    return !(this.props.claimForm.policyNo.error || this.props.claimForm.dateOfBirth.error);
+    const hasNoError = !(this.props.claimForm.policyNo.error || this.props.claimForm.dateOfBirth.error);
+    const touched = (this.props.claimForm.policyNo.touched || this.props.claimForm.dateOfBirth.touched);
+    return hasNoError && touched;
   }
   
   // form submit
   handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!this.isFirstStageValid() || !this.isSecondStageValid()) {
+      alert('Form has invalid data, please enter the data and try again.');
       return false;
     }
 
@@ -118,8 +121,7 @@ class ClaimForm extends React.Component<PropsFromRedux> {
     const stageView = (stage === 2) ? this.showStageTwo() : this.showStageOne();
     return (      
 
-      <form name="claimForm" onSubmit={this.handleSubmit} noValidate={true}> 
-        
+      <form name="claimForm" onSubmit={this.handleSubmit} noValidate={true}>         
         {stageView}
       </form>
     );
@@ -132,7 +134,7 @@ class ClaimForm extends React.Component<PropsFromRedux> {
     return (
       <div className="main">
         {this.showStageTitle(index, stageTitles.stages)}
-        {this.showStage()}
+        {this.showStage()}        
       </div>
     );
   }
