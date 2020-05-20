@@ -44,13 +44,22 @@ class ClaimForm extends React.Component<PropsFromRedux> {
     this.showStageTwo = this.showStageTwo.bind(this);
     this.showStage = this.showStage.bind(this);
     this.showStageTitle = this.showStageTitle.bind(this);
+    this.isFirstStageValid = this.isFirstStageValid.bind(this);
+    this.isSecondStageValid = this.isSecondStageValid.bind(this);
+  }
+
+  isFirstStageValid() {
+    return !(this.props.claimForm.firstName.error || this.props.claimForm.lastName.error || this.props.claimForm.email.error);
+  }
+
+  isSecondStageValid() {
+    return !(this.props.claimForm.policyNo.error || this.props.claimForm.dateOfBirth.error);
   }
   
   // form submit
   handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const { claimForm } = this.props;
-    if (!claimForm.isFormValid) {
+    if (!this.isFirstStageValid() || !this.isSecondStageValid()) {
       return false;
     }
 

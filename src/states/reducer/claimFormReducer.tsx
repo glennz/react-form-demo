@@ -15,8 +15,6 @@ import DateOfBirthType from "../../shared/DateOfBirthType";
 
 const initControlData = utility.initControlData
 
-const udpateControlData = utility.udpateControlData;
-
 // Initial State
 const initialState: IClaimForm = { 
   firstName: initControlData,
@@ -49,7 +47,7 @@ const claimFormReducer = (state = initialState, action: any) => {
       }
       case SET_POLICY_NO: {
         return Object.assign({}, state, {
-          policyNo: udpateControlData(action.payload)
+          policyNo: action.payload
         });
       }
       case SET_DATE_OF_BIRTH: {
@@ -60,7 +58,7 @@ const claimFormReducer = (state = initialState, action: any) => {
       }
       case SET_DESCRIPTION: {
         return Object.assign({}, state, {
-          description: udpateControlData(action.payload)
+          description: action.payload
         });
       }
       case SET_STAGE: {

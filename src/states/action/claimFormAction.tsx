@@ -27,7 +27,7 @@ export const setEmail = (payload: ControlDataType) => ({
     payload: payload,
 });
 
-export const setPolicyNo = (payload: string) => ({
+export const setPolicyNo = (payload: ControlDataType) => ({
     type: SET_POLICY_NO,
     payload: payload,
 });
@@ -37,7 +37,7 @@ export const setDateOfBirth = (payload: DateOfBirthType) => ({
     payload: payload,
 });
 
-export const setDescription = (payload: string) => ({
+export const setDescription = (payload: ControlDataType) => ({
     type: SET_DESCRIPTION,
     payload: payload,
 });

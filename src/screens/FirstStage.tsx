@@ -3,8 +3,8 @@ import { TextInput, Button } from '../components';
 import { connect, ConnectedProps } from 'react-redux';
 import { setFirstName, setLastName, setEmail, setStage, setIsFormValid } from '../states/action/claimFormAction';
 import utility from '../constant/ulitily';
-import ControlDataType from '../shared/ControlDataType';
 import validation from '../constant/validation';
+import ControlDataType from '../shared/ControlDataType';
 
 
 // Map State To Props (Redux Store Passes State To Component)
@@ -43,6 +43,7 @@ class FirstStage extends React.Component<PropsFromRedux> {
     this.buttonClick = this.buttonClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
+    this.isFirstStageValid = this.isFirstStageValid.bind(this);
   }
 
   buttonClick() {
@@ -91,6 +92,10 @@ class FirstStage extends React.Component<PropsFromRedux> {
     }
   }
 
+  isFirstStageValid() {
+    return !(this.props.firstName.error || this.props.lastName.error || this.props.email.error);
+  }
+
   render() {
     const { firstName, lastName, email } = this.props;
 
@@ -132,7 +137,7 @@ class FirstStage extends React.Component<PropsFromRedux> {
               </TextInput>
         </div>
         <div>
-            <Button id="btnNext" text="Next >" click={this.buttonClick}></Button>
+            <Button id="btnNext" text="Next >" click={this.buttonClick} disabled={this.isFirstStageValid() ? false : true}></Button>
         </div>
       </div>
     );

@@ -74,7 +74,7 @@ const validateControl = (controlName: string, value: any) => {
                 }
             }
             if (hasValidEmail(controls.EMAIL.validationRules)) {
-                if (validateEmail(value)) {
+                if (!validateEmail(value)) {
                     return 'Email is invalid';
                 }
             }
