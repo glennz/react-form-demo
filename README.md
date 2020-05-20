@@ -51,23 +51,23 @@ Duration: 7 hours
 
 2 build web component (done)
 
-3 unit test (yet to do)
+3 unit test (yet to be done)
 
 4 add redux and redux persist (done)
 
-5 validation (done most of them as they are not fully defined in the requirement)
+5 validation (done most of them as they are not fully defined in the requirement. date of birth validation is not covered)
 
 6 page navigation and local state/ global state management (done)
 
 7 style (done)
 
-8 bit.dev to manage web component and publish to npm as component library to reuse (yet to do)
+8 bit.dev to manage web component and publish to npm as component library to reuse (yet to be done)
 
 9 nestjs api (server side receive form data request, yet to do but this is not required)
 
 10 tested on Chrome and IE (done)
 
-11 E2E auto test (yet to do)
+11 E2E auto test (yet to be done)
 
 Demo website
 
