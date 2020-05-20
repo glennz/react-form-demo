@@ -49,10 +49,13 @@ Duration: 5 hours
 2 build web component (done)
 3 unit test (yet to do)
 4 add redux and redux persist (done)
-5 validation (yet to do, component has prepare for validation error message)
+5 validation (done most of them as they are not fully defined in the requirement)
 6 style (mostly done)
 8 bit.dev to manage web component and publish to npm as component library to reuse (yet to do)
 9 nestjs api (server side receive form data request, yet to do but this is not required)
+
+Note: don't have time to include a datetime picker and its icon next to date of birth. will use react datepicker from npm later if needed.
+don't have time to add unit tests. should add those tests for components and logic checking for Quality control.
 
 The result is output at console.dir when submit. To check the result, please open developer tool in chrome and see console message.
 
