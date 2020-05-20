@@ -43,7 +43,7 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-Tasks list for the project:
+### Tasks list for the project:
 
 Duration: 7 hours
 
