@@ -65,8 +65,14 @@ Duration: 7 hours
 
 9 nestjs api (server side receive form data request, yet to do but this is not required)
 
+Demo website
 
-Note: don't have time to include a datetime picker and its icon next to date of birth. will use react datepicker from npm later if needed.
+https://6crmy.csb.app/
+
+
+Things yet to be done: 
+
+don't have time to include a datetime picker component and its icon next to date of birth. will use react datepicker from npm later
 
 don't have time to add unit tests. should add those tests for components and logic checking for Quality control.
 
