@@ -20,8 +20,14 @@ const udpateControlData = (payload: string) => {
     return init;
   };
 
+const udpateControlDataDetails = (payload: string, error: string) => {
+    const init = {value: payload, touched: true, error: error} as ControlDataType;
+    return init;
+};
+
 export default {
     initControlData: initControlData,
     initialState: initialState,
-    udpateControlData: udpateControlData
+    udpateControlData: udpateControlData,
+    udpateControlDataDetails: udpateControlDataDetails
 };

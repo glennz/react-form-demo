@@ -10,18 +10,19 @@ import {
     CLEAR_FORM
 } from "./actions";
 import DateOfBirthType from '../../shared/DateOfBirthType';
+import ControlDataType from "../../shared/ControlDataType";
 
-export const setFirstName = (payload: string) => ({
+export const setFirstName = (payload: ControlDataType) => ({
     type: SET_FIRST_NAME,
     payload: payload,
 });
 
-export const setLastName = (payload: string) => ({
+export const setLastName = (payload: ControlDataType) => ({
     type: SET_LAST_NAME,
     payload: payload,
 });
 
-export const setEmail = (payload: string) => ({
+export const setEmail = (payload: ControlDataType) => ({
     type: SET_EMAIL,
     payload: payload,
 });

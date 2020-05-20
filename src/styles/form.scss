@@ -59,6 +59,11 @@ form {
         }
     }
 
+    .error-message {
+        color: red;
+        margin-bottom: 5px;
+    }
+
     @media only screen and (max-width : 480px) {
        
         .dob-inputs {

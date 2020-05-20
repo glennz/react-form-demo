@@ -13,8 +13,6 @@ import { IClaimForm } from '../../shared/IClaimForm';
 import utility from '../../constant/ulitily';
 import DateOfBirthType from "../../shared/DateOfBirthType";
 
-// const initControlData: ControlDataType = {value: '', touched: false, error: ''};
-
 const initControlData = utility.initControlData
 
 const udpateControlData = utility.udpateControlData;
@@ -35,19 +33,18 @@ const initialState: IClaimForm = {
 const claimFormReducer = (state = initialState, action: any) => {
     switch (action.type) {
       case SET_FIRST_NAME: {
-        const obj = udpateControlData(action.payload);
         return Object.assign({}, state, {
-          firstName: obj
+          firstName: action.payload
         });
       }
       case SET_LAST_NAME: {
         return Object.assign({}, state, {
-          lastName: udpateControlData(action.payload)
+          lastName: action.payload
         });
       }
       case SET_EMAIL: {
         return Object.assign({}, state, {
-          email: udpateControlData(action.payload)
+          email: action.payload
         });
       }
       case SET_POLICY_NO: {
