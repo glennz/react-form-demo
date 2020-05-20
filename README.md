@@ -43,7 +43,8 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-
+Tasks list for the project:
+Duration: 5 hours
 1 setup react framework (TS) (done)
 2 build web component (done)
 3 unit test (yet to do)
