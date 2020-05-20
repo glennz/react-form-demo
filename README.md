@@ -44,13 +44,14 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 To learn React, check out the [React documentation](https://reactjs.org/).
 
 Tasks list for the project:
-Duration: 5 hours
+Duration: 7 hours
 1 setup react framework (TS) (done)
 2 build web component (done)
 3 unit test (yet to do)
 4 add redux and redux persist (done)
 5 validation (done most of them as they are not fully defined in the requirement)
-6 style (mostly done)
+6 page navigation and local state/ global state management (done)
+6 style (done)
 8 bit.dev to manage web component and publish to npm as component library to reuse (yet to do)
 9 nestjs api (server side receive form data request, yet to do but this is not required)
 
@@ -59,3 +60,5 @@ don't have time to add unit tests. should add those tests for components and log
 
 The result is output at console.dir when submit. To check the result, please open developer tool in chrome and see console message.
 
+Architecture:
+Bit.dev -> Npm to manage web components -> claim form app
