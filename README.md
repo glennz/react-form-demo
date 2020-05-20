@@ -65,9 +65,9 @@ Duration: 7 hours
 
 9 nestjs api (server side receive form data request, yet to do but this is not required)
 
-10 tested on Chrome and IE
+10 tested on Chrome and IE (done)
 
-11 E2E auto test
+11 E2E auto test (yet to do)
 
 Demo website
 
