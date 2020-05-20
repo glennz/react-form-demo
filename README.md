@@ -43,7 +43,7 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Tasks list for the project:
+### Project Tasks list:
 
 Duration: 7 hours
 
@@ -64,6 +64,10 @@ Duration: 7 hours
 8 bit.dev to manage web component and publish to npm as component library to reuse (yet to do)
 
 9 nestjs api (server side receive form data request, yet to do but this is not required)
+
+10 tested on Chrome and IE
+
+11 E2E auto test
 
 Demo website
 
