@@ -1,0 +1,14 @@
+.page-title {
+    margin-bottom: 10px;
+    text-align: center;
+    
+    span:first-child {
+        border-radius: 25px;
+        border: 2px solid #73AD21;
+        padding-left: 5px;
+        padding-right: 5px;
+    }  
+    span:nth-child(2) {
+        padding-left: 7px;
+    }
+}
