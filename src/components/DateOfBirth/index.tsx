@@ -60,13 +60,13 @@ export const DateOfBirth = (props: DateOfBirthPropsType) => {
       const targetValue = e.target.value;
       switch(fieldName) {
           case 'day':
-              value.day = utility.udpateControlData(targetValue);
+              value.day = utility.updateControlData(targetValue);
               break;
           case 'month':
-              value.month = utility.udpateControlData(targetValue);
+              value.month = utility.updateControlData(targetValue);
               break;
           case 'year':
-                value.year = utility.udpateControlData(targetValue);
+                value.year = utility.updateControlData(targetValue);
                 break;
           default:
               value.day = utility.initControlData;

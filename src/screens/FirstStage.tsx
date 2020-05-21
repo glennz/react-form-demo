@@ -1,11 +1,13 @@
 import React from 'react';
 import { TextInput, Button } from '../components';
 import { connect, ConnectedProps } from 'react-redux';
-import { setFirstName, setLastName, setEmail, setStage, setIsFormValid } from '../states/action/claimFormAction';
+import { setFirstName, setLastName, setEmail, setStage } from '../states/action/claimFormAction';
 import utility from '../constant/ulitily';
 import validation from '../constant/validation';
 import ControlDataType from '../shared/ControlDataType';
+import ControlStateType from '../shared/ControlStateType';
 import { setFormMessage } from '../states/action/messageAction';
+import { setFirstNameState, setLastNameState, setEmailState } from '../states/action/claimFormStateAction';
 
 
 // Map State To Props (Redux Store Passes State To Component)
@@ -15,7 +17,9 @@ const mapStateToProps = (state: any) => {
     firstName: state.claimForm.firstName,
     lastName: state.claimForm.lastName,
     email: state.claimForm.email,
-    isFormValid: state.claimForm.isFormValid
+    firstNameState: state.claimFormState.firstName,
+    lastNameState: state.claimFormState.lastName,
+    emailState: state.claimFormState.email
   };
 };
 
@@ -26,8 +30,10 @@ const mapDispatchToProps = (dispatch: any) => {
     setFirstName: (firstname: ControlDataType) => dispatch(setFirstName(firstname)),
     setLastName: (lastname: ControlDataType) => dispatch(setLastName(lastname)),
     setEmail: (email: ControlDataType) => dispatch(setEmail(email)),
+    setFirstNameState: (firstname: ControlStateType) => dispatch(setFirstNameState(firstname)),
+    setLastNameState: (lastname: ControlStateType) => dispatch(setLastNameState(lastname)),
+    setEmailState: (email: ControlStateType) => dispatch(setEmailState(email)),
     setStage: (stage: number) => dispatch(setStage(stage)),
-    setIsFormValid: (valid: boolean) => dispatch(setIsFormValid(valid)),
     setFormMessage: (message: string) => dispatch(setFormMessage(message))
   };
 };
@@ -36,7 +42,8 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 class FirstStage extends React.Component<PropsFromRedux> {
-  udpateControlDataDetails = utility.udpateControlDataDetails;
+  updateControlData = utility.updateControlData;
+  updateControlState = utility.updateControlState;
   validateControl = validation.validateControl;
 
   constructor(props: PropsFromRedux) {
@@ -56,16 +63,22 @@ class FirstStage extends React.Component<PropsFromRedux> {
     const target = e.target;
     switch(target.name) {
       case 'firstname':
-        const fname = this.udpateControlDataDetails(target.value, '');
-        this.props.setFirstName(fname);
+        const fnameData = this.updateControlData(target.value);
+        this.props.setFirstName(fnameData);
+        const fnameState = this.updateControlState('');
+        this.props.setFirstNameState(fnameState);
         break;
       case 'lastname':
-        const lname = this.udpateControlDataDetails(target.value, '');
-        this.props.setLastName(lname);
+        const lnameData = this.updateControlData(target.value);
+        this.props.setLastName(lnameData);
+        const lnameState = this.updateControlState('');
+        this.props.setLastNameState(lnameState);
         break;
       case 'email':
-        const email = this.udpateControlDataDetails(target.value, '');
-        this.props.setEmail(email);
+        const emailData = this.updateControlData(target.value);
+        this.props.setEmail(emailData);
+        const emailState = this.updateControlState('');
+        this.props.setEmailState(emailState);
         break;
     }
 
@@ -77,22 +90,18 @@ class FirstStage extends React.Component<PropsFromRedux> {
     const target = e.target;
     const error = this.validateControl(target.name, target.value) || '';
 
-    if (error && this.props.isFormValid) {
-      this.props.setIsFormValid(false);
-    }
-
     switch(target.name) {
       case 'firstname':
-        const fname = this.udpateControlDataDetails(target.value, error);
-        this.props.setFirstName(fname);
+        const fnameState = this.updateControlState(error);
+        this.props.setFirstNameState(fnameState);
         break;
       case 'lastname':
-        const lname = this.udpateControlDataDetails(target.value, error);
-        this.props.setLastName(lname);
+        const lnameState = this.updateControlState(error);
+        this.props.setLastNameState(lnameState);
         break;
       case 'email':
-        const email = this.udpateControlDataDetails(target.value, error);
-        this.props.setEmail(email);
+        const emailState = this.updateControlState(error);
+        this.props.setEmailState(emailState);
         break;
     }
 
@@ -107,7 +116,7 @@ class FirstStage extends React.Component<PropsFromRedux> {
   }
 
   render() {
-    const { firstName, lastName, email } = this.props;
+    const { firstName, lastName, email, firstNameState, lastNameState,  emailState } = this.props;
 
     return (
       <div>
@@ -119,8 +128,8 @@ class FirstStage extends React.Component<PropsFromRedux> {
                 value={firstName.value}
                 onChange={this.handleChange}
                 onBlur={this.handleBlur}
-                error={firstName.error}                
-                touched={firstName.touched}>
+                error={firstNameState.error}                
+                touched={firstNameState.touched}>
               </TextInput>
   
               <TextInput 
@@ -130,8 +139,8 @@ class FirstStage extends React.Component<PropsFromRedux> {
                 value={lastName.value}
                 onBlur={this.handleBlur}
                 onChange={this.handleChange}
-                error={lastName.error}
-                touched={lastName.touched}>
+                error={lastNameState.error}
+                touched={lastNameState.touched}>
               </TextInput>
   
               <TextInput 
@@ -142,8 +151,8 @@ class FirstStage extends React.Component<PropsFromRedux> {
                 value={email.value}
                 onBlur={this.handleBlur}
                 onChange={this.handleChange}
-                error={email.error}
-                touched={email.touched}>
+                error={emailState.error}
+                touched={emailState.touched}>
               </TextInput>
         </div>
         <div>

@@ -1,7 +1,10 @@
 import { IClaimForm } from "../shared/IClaimForm";
+import ControlStateType from "../shared/ControlStateType";
 import ControlDataType from "../shared/ControlDataType";
 
-const initControlData = {value: '', touched: false, error: ''} as ControlDataType;
+const initStateData = {touched: false, error: ''} as ControlStateType;
+
+const initControlData = {value: ''} as ControlDataType;
 
 // Initial State
 const initialState: IClaimForm = { 
@@ -15,19 +18,20 @@ const initialState: IClaimForm = {
     isFormValid: true
 };
 
-const udpateControlData = (payload: string) => {
-    const init = {value: payload, touched: true, error: ''} as ControlDataType;
+const updateControlData = (payload: string) => {
+    const init = {value: payload} as ControlDataType;
     return init;
-  };
+};
 
-const udpateControlDataDetails = (payload: string, error: string) => {
-    const init = {value: payload, touched: true, error: error} as ControlDataType;
+const updateControlState = (error: string) => {
+    const init = { touched: true, error: error} as ControlStateType;
     return init;
 };
 
 export default {
+    initStateData: initStateData,
     initControlData: initControlData,
     initialState: initialState,
-    udpateControlData: udpateControlData,
-    udpateControlDataDetails: udpateControlDataDetails
+    updateControlData: updateControlData,
+    updateControlState: updateControlState
 };

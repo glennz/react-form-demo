@@ -12,12 +12,15 @@ import utility from '../constant/ulitily';
 import validation from '../constant/validation';
 import ControlDataType from '../shared/ControlDataType';
 import { setFormMessage } from '../states/action/messageAction';
+import { setPolicyNoState } from '../states/action/claimFormStateAction';
+import ControlStateType from '../shared/ControlStateType';
 
 // Map State To Props (Redux Store Passes State To Component)
 const mapStateToProps = (state: any) => {
   // Redux Store --> Page Component
   return {
     policyNo: state.claimForm.policyNo,
+    policyNoState: state.claimFormState.policyNo,
     dateOfBirth: state.claimForm.dateOfBirth,
     description: state.claimForm.description,
     isFormValid: state.claimForm.isFormValid
@@ -29,6 +32,7 @@ const mapDispatchToProps = (dispatch: any) => {
   // Action
   return {
     setPolicyNo: (policyNo: ControlDataType) => dispatch(setPolicyNo(policyNo)),
+    setPolicyNoState: (policyNoState: ControlStateType) => dispatch(setPolicyNoState(policyNoState)),
     setDateOfBirth: (dateOfBirth: DateOfBirthType) => dispatch(setDateOfBirth(dateOfBirth)),
     setDescription: (description: ControlDataType) => dispatch(setDescription(description)),
     setStage: (stage: number) => dispatch(setStage(stage)),
@@ -41,7 +45,9 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 class SecondStage extends React.Component<PropsFromRedux> {
-  udpateControlDataDetails = utility.udpateControlDataDetails;
+  udpateControlData = utility.updateControlData;
+  updateControlState = utility.updateControlState;
+  
   validateControl = validation.validateControl;
 
   constructor(props: PropsFromRedux) {
@@ -62,11 +68,13 @@ class SecondStage extends React.Component<PropsFromRedux> {
     const target = e.target;
     switch(target.name) {
       case 'policyNo':
-        const pno = this.udpateControlDataDetails(target.value, '');
+        const pno = this.udpateControlData(target.value);
         this.props.setPolicyNo(pno);
+        const pnoState = this.updateControlState('');
+        this.props.setPolicyNoState(pnoState);
         break;
       case 'description':
-        const desc = this.udpateControlDataDetails(target.value, '');
+        const desc = this.udpateControlData(target.value);
         this.props.setDescription(desc);
         break;
     }
@@ -89,12 +97,8 @@ class SecondStage extends React.Component<PropsFromRedux> {
 
     switch(target.name) {
       case 'policyNo':
-        const pno = this.udpateControlDataDetails(target.value, error);
-        this.props.setPolicyNo(pno);
-        break;
-      case 'description':
-        const desc = this.udpateControlDataDetails(target.value, error);
-        this.props.setDescription(desc);
+        const pnoState = this.updateControlState(error);
+        this.props.setPolicyNoState(pnoState);
         break;
     }
 
@@ -103,7 +107,7 @@ class SecondStage extends React.Component<PropsFromRedux> {
   }
 
   render() {
-    const { policyNo, dateOfBirth, description } = this.props;
+    const { policyNo, dateOfBirth, description, policyNoState } = this.props;
 
     return (
         <div>            
@@ -113,8 +117,8 @@ class SecondStage extends React.Component<PropsFromRedux> {
               value={policyNo.value}
               onBlur={this.handleBlur}
               onChange={this.handleChange}
-              error={policyNo.error}
-              touched={policyNo.touched}>
+              error={policyNoState.error}
+              touched={policyNoState.touched}>
             </TextInput>
 
             <DateOfBirth 

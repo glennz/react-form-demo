@@ -19,6 +19,7 @@ const mapStateToProps = (state: any) => {
   return {
     stage: state.claimForm.stage,
     claimForm: state.claimForm,
+    claimFormState: state.claimFormState,
     formMessage: state.messageReducer.formMessage
   };
 };
@@ -52,12 +53,12 @@ class ClaimForm extends React.Component<PropsFromRedux> {
   }
 
   isFirstStageValid() {
-    return !(this.props.claimForm.firstName.error || this.props.claimForm.lastName.error || this.props.claimForm.email.error);
+    return !(this.props.claimFormState.firstName.error || this.props.claimFormState.lastName.error || this.props.claimFormState.email.error);
   }
 
   isSecondStageValid() {
-    const hasNoError = !(this.props.claimForm.policyNo.error || this.props.claimForm.dateOfBirth.error);
-    const touched = (this.props.claimForm.policyNo.touched || this.props.claimForm.dateOfBirth.touched);
+    const hasNoError = !(this.props.claimFormState.policyNo.error);
+    const touched = (this.props.claimFormState.policyNo.touched);
     return hasNoError && touched;
   }
   

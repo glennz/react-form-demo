@@ -1,7 +1,5 @@
 type ControlDataType = {
-    value: string,
-    touched: boolean,
-    error: string
+    value: string
 };
 
 export default ControlDataType;
