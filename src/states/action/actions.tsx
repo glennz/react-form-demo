@@ -15,3 +15,5 @@ export const SET_STAGE = "SET_STAGE";
 export const SET_IS_FORM_VALID = "SET_IS_FORM_VALID";
 
 export const CLEAR_FORM = "CLEAR_FORM";
+
+export const SET_FORM_MESSAGE = "SET_FORM_MESSAGE";

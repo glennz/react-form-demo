@@ -11,6 +11,7 @@ import { setPolicyNo, setDateOfBirth, setDescription, setStage, setIsFormValid }
 import utility from '../constant/ulitily';
 import validation from '../constant/validation';
 import ControlDataType from '../shared/ControlDataType';
+import { setFormMessage } from '../states/action/messageAction';
 
 // Map State To Props (Redux Store Passes State To Component)
 const mapStateToProps = (state: any) => {
@@ -32,6 +33,7 @@ const mapDispatchToProps = (dispatch: any) => {
     setDescription: (description: ControlDataType) => dispatch(setDescription(description)),
     setStage: (stage: number) => dispatch(setStage(stage)),
     setIsFormValid: (valid: boolean) => dispatch(setIsFormValid(valid)),
+    setFormMessage: (message: string) => dispatch(setFormMessage(message))
   };
 };
 
@@ -68,6 +70,9 @@ class SecondStage extends React.Component<PropsFromRedux> {
         this.props.setDescription(desc);
         break;
     }
+
+    //clear global message
+    this.props.setFormMessage('');
   };
 
   setDateOfBirth(dateOfBirth: DateOfBirthType) {
@@ -92,6 +97,9 @@ class SecondStage extends React.Component<PropsFromRedux> {
         this.props.setDescription(desc);
         break;
     }
+
+    //clear global message
+    this.props.setFormMessage('');
   }
 
   render() {

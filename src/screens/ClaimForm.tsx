@@ -11,13 +11,15 @@ import '../styles/pageTitle.scss';
 import '../styles/layout.scss';
 import '../styles/form.scss';
 import { IClaim } from '../shared/IClaim';
+import { setFormMessage } from '../states/action/messageAction';
 
 // Map State To Props (Redux Store Passes State To Component)
 const mapStateToProps = (state: any) => {
   // Redux Store --> Page Component
   return {
     stage: state.claimForm.stage,
-    claimForm: state.claimForm
+    claimForm: state.claimForm,
+    formMessage: state.messageReducer.formMessage
   };
 };
 
@@ -26,7 +28,8 @@ const mapDispatchToProps = (dispatch: any) => {
   // Action
   return {
     setStage: (stage: number) => dispatch(setStage(stage)),
-    clearForm: () => dispatch(clearForm())
+    clearForm: () => dispatch(clearForm()),
+    setFormMessage: (message: string) => dispatch(setFormMessage(message))
   };
 };
 
@@ -62,10 +65,13 @@ class ClaimForm extends React.Component<PropsFromRedux> {
   handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!this.isFirstStageValid() || !this.isSecondStageValid()) {
-      alert('Form has invalid data, please enter the data and try again.');
+      this.props.setFormMessage('Form has invalid data, please enter the data and try again.');
       return false;
     }
 
+    if (this.props.formMessage) {
+      this.props.setFormMessage('');
+    }
     // submit form to api by axios. Do not do this as it is not in requirement
     const claimDetails = this.props.claimForm;
     const claimRequest: IClaim = {
@@ -128,13 +134,17 @@ class ClaimForm extends React.Component<PropsFromRedux> {
   }
 
   render() {
-    const { stage } = this.props;
+    const { stage, formMessage } = this.props;
     const index = (this.state.formSubmitted) ? 3 : stage;
 
     return (
       <div className="main">
         {this.showStageTitle(index, stageTitles.stages)}
-        {this.showStage()}        
+        {this.showStage()}
+
+        <div className="form-message">
+          {formMessage}
+        </div>
       </div>
     );
   }

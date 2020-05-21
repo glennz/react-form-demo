@@ -5,6 +5,7 @@ import { setFirstName, setLastName, setEmail, setStage, setIsFormValid } from '.
 import utility from '../constant/ulitily';
 import validation from '../constant/validation';
 import ControlDataType from '../shared/ControlDataType';
+import { setFormMessage } from '../states/action/messageAction';
 
 
 // Map State To Props (Redux Store Passes State To Component)
@@ -26,7 +27,8 @@ const mapDispatchToProps = (dispatch: any) => {
     setLastName: (lastname: ControlDataType) => dispatch(setLastName(lastname)),
     setEmail: (email: ControlDataType) => dispatch(setEmail(email)),
     setStage: (stage: number) => dispatch(setStage(stage)),
-    setIsFormValid: (valid: boolean) => dispatch(setIsFormValid(valid))
+    setIsFormValid: (valid: boolean) => dispatch(setIsFormValid(valid)),
+    setFormMessage: (message: string) => dispatch(setFormMessage(message))
   };
 };
 
@@ -66,6 +68,9 @@ class FirstStage extends React.Component<PropsFromRedux> {
         this.props.setEmail(email);
         break;
     }
+
+    //clear global message
+    this.props.setFormMessage('');    
   }
 
   handleBlur(e: React.ChangeEvent<HTMLInputElement>) {
@@ -90,6 +95,9 @@ class FirstStage extends React.Component<PropsFromRedux> {
         this.props.setEmail(email);
         break;
     }
+
+    //clear global message
+    this.props.setFormMessage('');
   }
 
   isFirstStageValid() {
@@ -139,7 +147,7 @@ class FirstStage extends React.Component<PropsFromRedux> {
               </TextInput>
         </div>
         <div>
-            <Button id="btnNext" text="Next >" click={this.buttonClick} disabled={this.isFirstStageValid() ? false : true}></Button>
+            <Button id="btnNext" text="Next >" click={this.buttonClick}></Button>
         </div>
       </div>
     );
