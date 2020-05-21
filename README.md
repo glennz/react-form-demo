@@ -86,3 +86,11 @@ The result is output at console.dir when submit. To check the result, please ope
 
 Architecture:
 Bit.dev -> Npm to manage web components -> claim form app
+
+Statemanagement
+
+Form values are persist, when page reload, it will be loaded from local storage. Storage will be cleared only when form is submitted or user clear browser cache.
+
+Form fields state including touched and error are manage by seperate storage which is not cached. Refresh browser will be cleared.
+
+Local state to keep form submitted status.
