@@ -43,7 +43,7 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Tasks list for the project:
+### Project Tasks list:
 
 Duration: 7 hours
 
@@ -51,22 +51,32 @@ Duration: 7 hours
 
 2 build web component (done)
 
-3 unit test (yet to do)
+3 unit test (yet to be done)
 
 4 add redux and redux persist (done)
 
-5 validation (done most of them as they are not fully defined in the requirement)
+5 validation (done most of them as they are not fully defined in the requirement. date of birth validation is not covered)
 
 6 page navigation and local state/ global state management (done)
 
 7 style (done)
 
-8 bit.dev to manage web component and publish to npm as component library to reuse (yet to do)
+8 bit.dev to manage web component and publish to npm as component library to reuse (yet to be done)
 
 9 nestjs api (server side receive form data request, yet to do but this is not required)
 
+10 tested on Chrome and IE (done)
 
-Note: don't have time to include a datetime picker and its icon next to date of birth. will use react datepicker from npm later if needed.
+11 E2E auto test (yet to be done)
+
+Demo website
+
+https://6crmy.csb.app/
+
+
+Things yet to be done: 
+
+don't have time to include a datetime picker component and its icon next to date of birth. will use react datepicker from npm later
 
 don't have time to add unit tests. should add those tests for components and logic checking for Quality control.
 
