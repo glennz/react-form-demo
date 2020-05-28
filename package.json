@@ -81,7 +81,7 @@
       "src"
     ],
     "testMatch": [
-      "**/tests/**/*.test.(ts|tsx|js)"
+      "**/*.test.(ts|tsx|js)"
     ],
     "collectCoverage": false
   }

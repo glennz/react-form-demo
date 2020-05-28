@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import { Button } from '../../src/components/Button';
+import { Button } from './index';
 
 describe('<Button />', () => {
   it('should render an enabled button', () => {

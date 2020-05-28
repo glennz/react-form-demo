@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import { TextInput } from '../../src/components/TextInput';
+import { TextInput } from './index';
 
 describe('<TextInput />', () => {
   const fieldProps = {
