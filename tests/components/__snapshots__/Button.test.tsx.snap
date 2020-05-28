@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Button /> should render a disabled button 1`] = `ReactWrapper {}`;
+
+exports[`<Button /> should render an enabled button 1`] = `ReactWrapper {}`;

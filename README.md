@@ -51,7 +51,7 @@ Duration: 7 hours
 
 2 build web component (done)
 
-3 unit test (yet to be done)
+3 unit test (added test framework and add 2 tests for components under test folder)
 
 4 add redux and redux persist (done)
 
