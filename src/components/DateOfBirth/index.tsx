@@ -1,35 +1,9 @@
 import React from 'react';
-import moment from 'moment';
 import DateOfBirthPropsType from '../../shared/DateOfBirthPropsType';
 import DateOfBirthType from '../../shared/DateOfBirthType';
 import PropTypes from 'prop-types';
 import utility from '../../constant/ulitily';
 
-export const parseFields = (value: string, name: string) => {
-  if (name === 'day') {
-    return value.replace(/[^0-9]/g, '');
-  }
-  if (name === 'month') {
-    return value.replace(/[^0-9a-zA-Z]/g, '');
-  }
-  if (name === 'year') {
-    return value.replace(/[^0-9]/g, '');
-  }
-  if (name === 'parsed') {
-    return value && moment.utc(value, 'YYYY-MM-DD').format();
-  }
-  return value;
-};
-
-export const formatFields = (value: string, name: string) => {
-  let newVal = value;
-  if (name === 'parsed' && newVal) {
-    newVal = moment.utc(newVal).format('YYYY-MM-DD');
-  }
-  return newVal || '';
-};
-
-/* eslint-disable complexity */
 export const DateOfBirth = (props: DateOfBirthPropsType) => {
   const {
     id, 
@@ -48,15 +22,13 @@ export const DateOfBirth = (props: DateOfBirthPropsType) => {
   const dateAuFormat = 'au';
 
   const inputProps = (fieldName: string) => ({
-    className: 'dob-field',
+    className: 'dob-input-field',
     id: `${id}.${fieldName}`,
     name: `${name}.${fieldName}`,
     onBlur: () => {
-        setTouched && setTouched(`${name}.parsed`, true);
+      setTouched && setTouched(name, true);
     },
     onChange: (e: any) => {
-      // const inputValue = parseFields(e.target.value, `${fieldName}`);
-      // // setValue && setValue(`${name}.${fieldName}`, inputValue);
       const targetValue = e.target.value;
       switch(fieldName) {
           case 'day':
@@ -66,8 +38,8 @@ export const DateOfBirth = (props: DateOfBirthPropsType) => {
               value.month = utility.updateControlData(targetValue);
               break;
           case 'year':
-                value.year = utility.updateControlData(targetValue);
-                break;
+              value.year = utility.updateControlData(targetValue);
+              break;
           default:
               value.day = utility.initControlData;
               value.month = utility.initControlData;
@@ -139,7 +111,7 @@ export const DateOfBirth = (props: DateOfBirthPropsType) => {
     <div className={`dob-inputs-section${touched && error ? ' error' : ''}`}>
       {labelControl()}
       {dateControl()}
-      {touched && (error && <div className="error message">{error}</div>)}
+      {touched && (error && <div className="error-message">{error}</div>)}
     </div>
   );
 };
@@ -153,6 +125,7 @@ DateOfBirth.propTypes = {
   name: PropTypes.string.isRequired,  
   label: PropTypes.string,
   dateOfBirth: PropTypes.any.isRequired,
+  dateFormat: PropTypes.string,
   error: PropTypes.string,
   touched: PropTypes.bool,
   children: PropTypes.node,

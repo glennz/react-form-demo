@@ -51,9 +51,9 @@ const claimFormReducer = (state = initialState, action: any) => {
         });
       }
       case SET_DATE_OF_BIRTH: {
-        const date = action.payload as DateOfBirthType;
+        const dob = action.payload as DateOfBirthType;
         return Object.assign({}, state, {
-          dateOfBirth: date
+          dateOfBirth: dob
         });
       }
       case SET_DESCRIPTION: {

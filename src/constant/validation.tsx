@@ -1,4 +1,5 @@
 import moment from 'moment';
+import DateOfBirthType from '../shared/DateOfBirthType';
 
 const controls = {
     FIRST_NAME: { name: 'firstName', validationRules: [{required: true}] },
@@ -108,6 +109,21 @@ const validateControl = (controlName: string, value: any) => {
     }
 };
 
+const validateDateOfBirth = (dob: DateOfBirthType, dateFormats: Array<string>) => {
+    if (!dob.day || !dob.month || !dob.year) {
+      return 'Date of birth is required';
+    }
+    
+    const dateParsed = moment.utc(
+      `${dob.day.value.trim()} ${dob.month.value.trim()} ${dob.year.value.trim()}`,
+      dateFormats,
+      true
+    );
+
+    return dateParsed.isValid() ? '' : 'Date of birth is invalid';
+};
+
 export default {
-    validateControl: validateControl
+    validateControl: validateControl,
+    validateDateOfBirth: validateDateOfBirth,
 };

@@ -12,7 +12,7 @@ import utility from '../constant/ulitily';
 import validation from '../constant/validation';
 import ControlDataType from '../shared/ControlDataType';
 import { setFormMessage } from '../states/action/messageAction';
-import { setPolicyNoState } from '../states/action/claimFormStateAction';
+import { setPolicyNoState, setDateOfBirthState } from '../states/action/claimFormStateAction';
 import ControlStateType from '../shared/ControlStateType';
 
 // Map State To Props (Redux Store Passes State To Component)
@@ -22,6 +22,7 @@ const mapStateToProps = (state: any) => {
     policyNo: state.claimForm.policyNo,
     policyNoState: state.claimFormState.policyNo,
     dateOfBirth: state.claimForm.dateOfBirth,
+    dateOfBirthState: state.claimFormState.dateOfBirth,
     description: state.claimForm.description,
     isFormValid: state.claimForm.isFormValid
   };
@@ -34,6 +35,7 @@ const mapDispatchToProps = (dispatch: any) => {
     setPolicyNo: (policyNo: ControlDataType) => dispatch(setPolicyNo(policyNo)),
     setPolicyNoState: (policyNoState: ControlStateType) => dispatch(setPolicyNoState(policyNoState)),
     setDateOfBirth: (dateOfBirth: DateOfBirthType) => dispatch(setDateOfBirth(dateOfBirth)),
+    setDateOfBirthState: (dateOfBirthState: ControlStateType) => dispatch(setDateOfBirthState(dateOfBirthState)),
     setDescription: (description: ControlDataType) => dispatch(setDescription(description)),
     setStage: (stage: number) => dispatch(setStage(stage)),
     setIsFormValid: (valid: boolean) => dispatch(setIsFormValid(valid)),
@@ -45,10 +47,12 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 class SecondStage extends React.Component<PropsFromRedux> {
+
+  // initial data
   udpateControlData = utility.updateControlData;
-  updateControlState = utility.updateControlState;
-  
+  updateControlState = utility.updateControlState;  
   validateControl = validation.validateControl;
+  validateDateOfBirth = validation.validateDateOfBirth;
 
   constructor(props: PropsFromRedux) {
     super(props);
@@ -85,6 +89,15 @@ class SecondStage extends React.Component<PropsFromRedux> {
 
   setDateOfBirth(dateOfBirth: DateOfBirthType) {
     this.props.setDateOfBirth(dateOfBirth);
+
+    const dobValid = this.validateDateOfBirth(dateOfBirth, ['DD MM YYYY']);
+    if (dobValid) {
+      const dobState = this.updateControlState(dobValid);
+      this.props.setDateOfBirthState(dobState);
+    }
+    else {
+      this.props.setDateOfBirthState(this.updateControlState(''));
+    }
   }
 
   handleBlur(e: React.ChangeEvent<HTMLInputElement>) {
@@ -107,7 +120,7 @@ class SecondStage extends React.Component<PropsFromRedux> {
   }
 
   render() {
-    const { policyNo, dateOfBirth, description, policyNoState } = this.props;
+    const { policyNo, dateOfBirth, description, policyNoState, dateOfBirthState } = this.props;
 
     return (
         <div>            
@@ -126,7 +139,9 @@ class SecondStage extends React.Component<PropsFromRedux> {
               name="dateOfBirth"
               label="Event Date"
               dateOfBirth={dateOfBirth}
-              setValue={this.setDateOfBirth}>
+              setValue={this.setDateOfBirth}
+              error={dateOfBirthState.error}
+              touched={dateOfBirthState.touched}>
             </DateOfBirth>
 
             <TextArea 

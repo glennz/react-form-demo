@@ -57,8 +57,10 @@ class ClaimForm extends React.Component<PropsFromRedux> {
   }
 
   isSecondStageValid() {
-    const hasNoError = !(this.props.claimFormState.policyNo.error);
-    const touched = (this.props.claimFormState.policyNo.touched);
+    const hasNoError = !(this.props.claimFormState.policyNo.error
+      && this.props.claimFormState.dateOfBirth.error);
+    const touched = (this.props.claimFormState.policyNo.touched
+      && this.props.claimFormState.dateOfBirth.touched);
     return hasNoError && touched;
   }
   

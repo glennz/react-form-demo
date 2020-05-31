@@ -3,6 +3,7 @@ import {
     SET_LAST_NAME_STATE, 
     SET_EMAIL_STATE, 
     SET_POLICY_NO_STATE,
+    SET_DATE_OF_BIRTH_STATE,
 } from "../action/actions";
 import utility from '../../constant/ulitily';
 
@@ -14,6 +15,7 @@ const initialState = {
   lastName: initControlState,
   email: initControlState,
   policyNo: initControlState,  
+  dateOfBirth: initControlState,
 };
 
 // Reducers (Modifies The State And Returns A New State)
@@ -37,6 +39,11 @@ const claimFormStateReducer = (state = initialState, action: any) => {
       case SET_POLICY_NO_STATE: {
         return Object.assign({}, state, {
           policyNo: action.payload
+        });
+      }   
+      case SET_DATE_OF_BIRTH_STATE: {
+        return Object.assign({}, state, {
+          dateOfBirth: action.payload
         });
       }      
       // Default
