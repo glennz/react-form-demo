@@ -38,4 +38,23 @@ describe('<TextInput />', () => {
 
     expect(textInput).toMatchSnapshot();
   });
+
+  it('should handle events', () => {
+    const localFieldProps = {
+      ...fieldProps,
+      onBlur: jest.fn(),
+      onChange: jest.fn()
+    };
+    const textField = mount(<TextInput {...localFieldProps} />);
+    const input = textField.find('input');
+    expect(input).toHaveLength(1);
+    input.simulate('change', {
+      target: { name: 'test', value: 'test' }
+    });
+    expect(localFieldProps.onBlur).toHaveBeenCalledTimes(0);
+    expect(localFieldProps.onChange).toHaveBeenCalledTimes(1);
+    input.simulate('blur');
+    expect(localFieldProps.onBlur).toHaveBeenCalledTimes(1);
+    expect(localFieldProps.onChange).toHaveBeenCalledTimes(1);
+  });
 });
