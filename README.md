@@ -52,7 +52,7 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ### Project Tasks list:
 
-Duration: 7 hours
+Duration: 12 hours
 
 1 setup react framework (TS) (done)
 
