@@ -64,30 +64,25 @@ validatation: email and dob date. Allow enter future date as dob. No min and max
 
 7 style (done)
 
-8 bit.dev to manage web component and publish to npm as component library to reuse (yet to be done)
+8 bit.dev to manage web component and publish to npm as component library to reuse (not required)
 
-9 nestjs api (server side receive form data request, yet to do but this is not required)
+9 nestjs api (not required)
 
 10 tested on Chrome and IE (done)
 
-11 E2E auto test (yet to be done)
+11 tested on desktop, tablet and mobile (done)
+
+11 E2E auto test (not required)
 
 Demo website
 
 https://6crmy.csb.app/
 
 
-Things yet to be done: 
-
-don't have time to include a datetime picker component and its icon next to date of birth. will use react datepicker from npm later
-
-don't have time to add unit tests. should add those tests for components and logic checking for Quality control.
-
-
 The result is output at console.dir when submit. To check the result, please open developer tool in chrome and see console message.
 
 
-Architecture:
+Future Architecture:
 Bit.dev -> Npm to manage web components -> claim form app
 
 Statemanagement
