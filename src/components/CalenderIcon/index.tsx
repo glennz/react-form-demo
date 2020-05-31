@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import icon from './images/calender.svg';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -20,7 +19,8 @@ export const CalenderIcon = (props: any) => {
 
     const ImageCustomInput = React.forwardRef((props: any, ref: any) => {
         return (
-            <img src={icon} onClick={props.onClick} className="calender-icon" alt="" />
+            <img src="https://d29fhpw069ctt2.cloudfront.net/icon/image/38308/preview.svg" 
+                onClick={props.onClick} className="calender-icon" alt="" />
         )
     });
     
