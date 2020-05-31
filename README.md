@@ -51,11 +51,14 @@ Duration: 7 hours
 
 2 build web component (done)
 
-3 unit test (added test framework and add 2 tests for components under test folder)
+3 unit test (added test framework and add tests for components)
 
 4 add redux and redux persist (done)
 
-5 validation (done most of them as they are not fully defined in the requirement. date of birth validation is not covered)
+5 validation (done)
+  
+under assumption, required field: firstname, lastname, policyno, dateOfBirth, email.
+validatation: email and dob date. Allow enter future date as dob. No min and max validation
 
 6 page navigation and local state/ global state management (done)
 
