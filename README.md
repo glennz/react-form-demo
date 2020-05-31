@@ -1,3 +1,10 @@
+## react-form-demo
+
+Demo website
+
+https://6crmy.csb.app/
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -73,10 +80,6 @@ validatation: email and dob date. Allow enter future date as dob. No min and max
 11 tested on desktop, tablet and mobile (done)
 
 11 E2E auto test (not required)
-
-Demo website
-
-https://6crmy.csb.app/
 
 
 The result is output at console.dir when submit. To check the result, please open developer tool in chrome and see console message.
