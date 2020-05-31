@@ -110,7 +110,7 @@ const validateControl = (controlName: string, value: any) => {
 };
 
 const validateDateOfBirth = (dob: DateOfBirthType, dateFormats: Array<string>) => {
-    if (!dob.day || !dob.month || !dob.year) {
+    if (!dob.day || !dob.day.value || !dob.month || !dob.month.value || !dob.year || !dob.year.value) {
       return 'Date of birth is required';
     }
     
