@@ -20,7 +20,12 @@ const initialState: IClaimForm = {
   firstName: initControlData,
   lastName: initControlData,
   email: initControlData,    
-  dateOfBirth: { day: initControlData, month: initControlData, year: initControlData },
+  dateOfBirth: { 
+    day: initControlData, 
+    month: initControlData, 
+    year: initControlData,
+    date: null 
+  },
   description: initControlData,
   policyNo: initControlData,  
   stage: 1,

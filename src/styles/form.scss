@@ -59,6 +59,15 @@ form {
         }
     }
 
+    .react-datepicker-wrapper {
+        float: right;
+        img {
+            &.calender-icon {
+                margin-top: 28px;
+            }
+        }
+    }
+
     .error-message {
         color: red;
         margin-bottom: 5px;
@@ -74,6 +83,11 @@ form {
                 display: none;
                 visibility: hidden;
             }
+        }
+
+        .react-datepicker-wrapper {
+            display: none;
+            visibility: hidden;
         }
     }   
 }

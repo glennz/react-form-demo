@@ -12,6 +12,7 @@ import '../styles/layout.scss';
 import '../styles/form.scss';
 import { IClaim } from '../shared/IClaim';
 import { setFormMessage } from '../states/action/messageAction';
+import validation from '../constant/validation';
 
 // Map State To Props (Redux Store Passes State To Component)
 const mapStateToProps = (state: any) => {
@@ -48,26 +49,12 @@ class ClaimForm extends React.Component<PropsFromRedux> {
     this.showStageTwo = this.showStageTwo.bind(this);
     this.showStage = this.showStage.bind(this);
     this.showStageTitle = this.showStageTitle.bind(this);
-    this.isFirstStageValid = this.isFirstStageValid.bind(this);
-    this.isSecondStageValid = this.isSecondStageValid.bind(this);
-  }
+  } 
 
-  isFirstStageValid() {
-    return !(this.props.claimFormState.firstName.error || this.props.claimFormState.lastName.error || this.props.claimFormState.email.error);
-  }
-
-  isSecondStageValid() {
-    const hasNoError = !(this.props.claimFormState.policyNo.error
-      && this.props.claimFormState.dateOfBirth.error);
-    const touched = (this.props.claimFormState.policyNo.touched
-      && this.props.claimFormState.dateOfBirth.touched);
-    return hasNoError && touched;
-  }
-  
   // form submit
   handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!this.isFirstStageValid() || !this.isSecondStageValid()) {
+    if (!validation.validateForm(this.props.claimForm)) {
       this.props.setFormMessage('Form has invalid data, please enter the data and try again.');
       return false;
     }

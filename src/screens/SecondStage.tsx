@@ -9,6 +9,7 @@ import DateOfBirthType from '../shared/DateOfBirthType';
 import { connect, ConnectedProps } from 'react-redux';
 import { setPolicyNo, setDateOfBirth, setDescription, setStage, setIsFormValid } from '../states/action/claimFormAction';
 import utility from '../constant/ulitily';
+import config from '../constant/config';
 import validation from '../constant/validation';
 import ControlDataType from '../shared/ControlDataType';
 import { setFormMessage } from '../states/action/messageAction';
@@ -51,8 +52,9 @@ class SecondStage extends React.Component<PropsFromRedux> {
   // initial data
   udpateControlData = utility.updateControlData;
   updateControlState = utility.updateControlState;  
+  parseDate = utility.parseDate;
   validateControl = validation.validateControl;
-  validateDateOfBirth = validation.validateDateOfBirth;
+  validateDateOfBirth = validation.validateDateOfBirth;  
 
   constructor(props: PropsFromRedux) {
     super(props);
@@ -88,25 +90,22 @@ class SecondStage extends React.Component<PropsFromRedux> {
   };
 
   setDateOfBirth(dateOfBirth: DateOfBirthType) {
-    this.props.setDateOfBirth(dateOfBirth);
-
-    const dobValid = this.validateDateOfBirth(dateOfBirth, ['DD MM YYYY']);
-    if (dobValid) {
-      const dobState = this.updateControlState(dobValid);
+    const dobInvalidErrMsg = this.validateDateOfBirth(dateOfBirth, [config.dateFormatAU]);
+    if (dobInvalidErrMsg) {
+      const dobState = this.updateControlState(dobInvalidErrMsg);
       this.props.setDateOfBirthState(dobState);
     }
     else {
+      dateOfBirth.date = this.parseDate(dateOfBirth, [config.dateFormatAU]).toDate();
       this.props.setDateOfBirthState(this.updateControlState(''));
     }
+
+    this.props.setDateOfBirth(dateOfBirth);
   }
 
   handleBlur(e: React.ChangeEvent<HTMLInputElement>) {
     const target = e.target;
     const error = this.validateControl(target.name, target.value) || '';
-
-    if (error && this.props.isFormValid) {
-      this.props.setIsFormValid(false);
-    }
 
     switch(target.name) {
       case 'policyNo':

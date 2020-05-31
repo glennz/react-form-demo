@@ -1,5 +1,8 @@
 import moment from 'moment';
 import DateOfBirthType from '../shared/DateOfBirthType';
+import utility from './ulitily';
+import { IClaimForm } from '../shared/IClaimForm';
+import config from './config';
 
 const controls = {
     FIRST_NAME: { name: 'firstName', validationRules: [{required: true}] },
@@ -50,6 +53,8 @@ const hasValidDate = (rules: Array<any>) => {
     }
     return false;
 }
+
+
 
 const validateControl = (controlName: string, value: any) => {
     const cname = controlName.toLocaleLowerCase();
@@ -109,16 +114,21 @@ const validateControl = (controlName: string, value: any) => {
     }
 };
 
+const validateForm = (claimForm: IClaimForm) => {
+    const errorFirstName = validateControl(controls.FIRST_NAME.name, claimForm.firstName.value);
+    const errorLastName = validateControl(controls.LAST_NAME.name, claimForm.lastName.value);
+    const errorEmail = validateControl(controls.EMAIL.name, claimForm.email.value);
+    const errorPolicyNo = validateControl(controls.POLICY_NO.name, claimForm.policyNo.value);
+    const errorDateOfBirth = validateDateOfBirth(claimForm.dateOfBirth, [config.dateFormatAU]);
+    return !(errorFirstName || errorLastName || errorEmail || errorPolicyNo || errorDateOfBirth);
+};
+
 const validateDateOfBirth = (dob: DateOfBirthType, dateFormats: Array<string>) => {
     if (!dob.day || !dob.day.value || !dob.month || !dob.month.value || !dob.year || !dob.year.value) {
       return 'Date of birth is required';
     }
     
-    const dateParsed = moment.utc(
-      `${dob.day.value.trim()} ${dob.month.value.trim()} ${dob.year.value.trim()}`,
-      dateFormats,
-      true
-    );
+    const dateParsed = utility.parseDate(dob, dateFormats);
 
     return dateParsed.isValid() ? '' : 'Date of birth is invalid';
 };
@@ -126,4 +136,5 @@ const validateDateOfBirth = (dob: DateOfBirthType, dateFormats: Array<string>) =
 export default {
     validateControl: validateControl,
     validateDateOfBirth: validateDateOfBirth,
+    validateForm: validateForm
 };

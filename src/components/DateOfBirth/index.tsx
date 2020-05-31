@@ -3,6 +3,7 @@ import DateOfBirthPropsType from '../../shared/DateOfBirthPropsType';
 import DateOfBirthType from '../../shared/DateOfBirthType';
 import PropTypes from 'prop-types';
 import utility from '../../constant/ulitily';
+import { CalenderIcon } from '../CalenderIcon';
 
 export const DateOfBirth = (props: DateOfBirthPropsType) => {
   const {
@@ -82,7 +83,7 @@ export const DateOfBirth = (props: DateOfBirthPropsType) => {
         <span className="splitter">/</span>
         {monthControl()} 
         <span className="splitter">/</span>
-        {yearControl()}
+        {yearControl()}        
       </div>
     );
   };
@@ -94,7 +95,7 @@ export const DateOfBirth = (props: DateOfBirthPropsType) => {
         <span className="splitter">/</span>
         {dayControl()} 
         <span className="splitter">/</span>    
-        {yearControl()}
+        {yearControl()}        
       </div>
     );
   };
@@ -107,10 +108,27 @@ export const DateOfBirth = (props: DateOfBirthPropsType) => {
     return (label) ? (<label>{label}</label>) : null;
   };
 
+  const setDate = (date: Date | null) => {
+    const day = (date) 
+      ? ((date.getDate() < 10) ? `0${date.getDate().toString()}` : date.getDate().toString() )
+      : '';
+    const month = (date) 
+      ? ((date.getMonth() + 1) < 10 ? `0${(date.getMonth() + 1).toString()}` : (date.getMonth() + 1).toString())
+      : '';
+    const year = (date) ? date.getFullYear().toString() : '';
+    value.day = utility.updateControlData(day);
+    value.month = utility.updateControlData(month);
+    value.year = utility.updateControlData(year);
+    setValue && setValue(value);
+  };
+
   return (
     <div className={`dob-inputs-section${touched && error ? ' error' : ''}`}>
+      
       {labelControl()}
-      {dateControl()}
+      <CalenderIcon selectedDate={dateOfBirth.date} setDateValue={setDate}></CalenderIcon>
+      {dateControl()}      
+      
       {touched && (error && <div className="error-message">{error}</div>)}
     </div>
   );

@@ -1,6 +1,8 @@
 import { IClaimForm } from "../shared/IClaimForm";
 import ControlStateType from "../shared/ControlStateType";
 import ControlDataType from "../shared/ControlDataType";
+import DateOfBirthType from "../shared/DateOfBirthType";
+import moment from "moment";
 
 const initStateData = {touched: false, error: ''} as ControlStateType;
 
@@ -11,7 +13,7 @@ const initialState: IClaimForm = {
     firstName: initControlData,
     lastName: initControlData,
     email: initControlData,    
-    dateOfBirth: { day: initControlData, month: initControlData, year: initControlData },
+    dateOfBirth: { day: initControlData, month: initControlData, year: initControlData, date: null },
     description: initControlData,
     policyNo: initControlData,  
     stage: 1,
@@ -28,10 +30,17 @@ const updateControlState = (error: string) => {
     return init;
 };
 
+const parseDate = (dob: DateOfBirthType, dateFormats: Array<string>) =>  moment.utc(
+    `${dob.day.value.trim()} ${dob.month.value.trim()} ${dob.year.value.trim()}`,
+    dateFormats,
+    true
+);
+
 export default {
     initStateData: initStateData,
     initControlData: initControlData,
     initialState: initialState,
     updateControlData: updateControlData,
-    updateControlState: updateControlState
+    updateControlState: updateControlState,
+    parseDate: parseDate,
 };
